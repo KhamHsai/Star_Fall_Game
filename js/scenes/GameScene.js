@@ -34,6 +34,13 @@ export default class GameScene extends Phaser.Scene {
         // Input controls
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        // Touch controls for mobile
+        this.input.on('pointermove', (pointer) => {
+            if (pointer.isDown && !this.gameOver) {
+                this.bar.x = pointer.x;
+            }
+        });
+
         // Star spawning timer
         this.starSpawnTimer = this.time.addEvent({
             delay: this.spawnRate,
@@ -82,36 +89,41 @@ export default class GameScene extends Phaser.Scene {
     }
 
     createUI() {
+        // Check if mobile device
+        const isMobile = this.scale.width < 768;
+        const fontSize = isMobile ? '18px' : '28px';
+        const strokeThickness = isMobile ? 2 : 4;
+
         // Score
         this.scoreText = this.add.text(20, 20, `Score: ${this.score}`, {
-            fontSize: '28px',
+            fontSize: fontSize,
             fill: '#ffffff',
             stroke: '#000',
-            strokeThickness: 4
+            strokeThickness: strokeThickness
         });
 
         // Misses
-        this.missesText = this.add.text(20, 60, `Misses: ${this.misses}/${this.maxMisses}`, {
-            fontSize: '28px',
+        this.missesText = this.add.text(20, isMobile ? 50 : 60, `Misses: ${this.misses}/${this.maxMisses}`, {
+            fontSize: fontSize,
             fill: '#ffffff',
             stroke: '#000',
-            strokeThickness: 4
+            strokeThickness: strokeThickness
         });
 
         // Timer
-        this.timerText = this.add.text(20, 100, `Time: ${this.timeLeft}`, {
-            fontSize: '28px',
+        this.timerText = this.add.text(20, isMobile ? 80 : 100, `Time: ${this.timeLeft}`, {
+            fontSize: fontSize,
             fill: '#ffffff',
             stroke: '#000',
-            strokeThickness: 4
+            strokeThickness: strokeThickness
         });
 
         // Difficulty indicator
-        this.difficultyText = this.add.text(700, 20, this.difficulty.toUpperCase(), {
-            fontSize: '24px',
+        this.difficultyText = this.add.text(isMobile ? this.scale.width - 20 : 700, 20, this.difficulty.toUpperCase(), {
+            fontSize: isMobile ? '16px' : '24px',
             fill: '#ffd700',
             stroke: '#000',
-            strokeThickness: 4
+            strokeThickness: strokeThickness
         }).setOrigin(1, 0);
     }
 

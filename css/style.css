@@ -11,10 +11,34 @@ body {
     min-height: 100vh;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     font-family: 'Arial', sans-serif;
+    overflow: hidden;
 }
 
 #game-container {
     border: 4px solid #4a90e2;
     border-radius: 10px;
     box-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    #game-container {
+        border: 2px solid #4a90e2;
+        border-radius: 5px;
+        box-shadow: 0 0 20px rgba(74, 144, 226, 0.3);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 0;
+    }
+    
+    #game-container {
+        border: 1px solid #4a90e2;
+        border-radius: 3px;
+        box-shadow: 0 0 15px rgba(74, 144, 226, 0.2);
+    }
 }
