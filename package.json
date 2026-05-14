@@ -1,0 +1,15 @@
+{
+  "name": "starfall-game",
+  "version": "1.0.0",
+  "description": "A Star Fall game built with Phaser.js",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080"
+  },
+  "dependencies": {
+    "phaser": "^3.60.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
